@@ -2,14 +2,15 @@ import axios, { AxiosError } from "axios";
 
 const BASE_ORIGIN = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 const BASE_URL = `${BASE_ORIGIN}/api`;
+import {Task, CreateTaskInput } from '@/types/page'
 
-interface Task {
-  _id?: string;
-  title: string;
-  description: string;
-  completed?: boolean;
-  createdAt?: string;
-}
+// interface Task {
+//   _id?: string;
+//   title: string;
+//   description: string;
+//   completed?: boolean;
+//   createdAt?: string;
+// }
 
 interface ApiResponse<T> {
   success: boolean;
@@ -46,7 +47,7 @@ const safeRequest = async <T = any>(
 };
 
 // 🔹 Create Task
-export const createTask = async (task: Task) =>
+export const createTask = async (task: CreateTaskInput) =>
   await safeRequest<ApiResponse<Task>>("post", "/tasks", task);
 
 // 🔹 Update Task

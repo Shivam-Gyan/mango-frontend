@@ -27,14 +27,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Plus, MoreVertical } from "lucide-react";
 import toast from "react-hot-toast";
 import { DialogOverlay, DialogPortal } from "@radix-ui/react-dialog";
+import {Task} from '@/types/page'
 
-interface Task {
-  _id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-  createdAt: string;
-}
+// interface Task {
+//   _id: string;
+//   title: string;
+//   description: string;
+//   completed: boolean;
+//   createdAt: string;
+// }
 
 export default function DashboardPage() {
   const { user } = useProfile();
@@ -78,7 +79,8 @@ export default function DashboardPage() {
   const toggleTask = async (taskId: string, currentState: boolean) => {
     try {
       const { task } = await updateTask(taskId, { completed: !currentState });
-      setTasks((prev) => prev.map((t) => (t._id === task._id ? task : t)));
+      setTasks((prev: Task[]) => prev.map((t) => (t._id === task._id ? task : t)));
+
       toast.success("Task updated!");
     } catch (err) {
       console.error("Error updating task:", err);
