@@ -90,7 +90,7 @@ const LoginPage = () => {
 
                         <div className="social-buttons flex justify-center w-full gap-4">
                             <button className="cursor-pointer hover:border-blue-500 flex items-center justify-center w-fit py-1 px-2 border border-slate-200 rounded-full text-white">
-                                <img className="w-8 h-8 bg-center" src="https://www.pngmart.com/files/22/Google-PNG-File.png" alt="Google" />
+                                <Image width={32} height={32} className="w-8 h-8 bg-center" src="https://www.pngmart.com/files/22/Google-PNG-File.png" alt="Google" />
                                 <span className="text-slate-400 text-xs font-light">Sign in with Google</span>
                             </button>
                         </div>
