@@ -12,6 +12,7 @@ interface User {
 
 interface ProfileContextType {
   user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
@@ -39,12 +40,14 @@ export const ProfileProvider = ({ children }: { children: React.ReactNode }) => 
     }
   };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+ useEffect(() => {
+  
+  fetchProfile();
+}, []);
+
 
   return (
-    <ProfileContext.Provider value={{ user, loading, error, refetch: fetchProfile }}>
+    <ProfileContext.Provider value={{ user, setUser, loading, error, refetch: fetchProfile }}>
       {children}
     </ProfileContext.Provider>
   );

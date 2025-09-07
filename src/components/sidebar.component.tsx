@@ -44,20 +44,16 @@ export default function Sidebar({ sidebarOpen,setSidebarOpen }: SidebarProps) {
             )}
         >
             <div className="flex w-full items-center justify-between mb-8">
-                <Link href={'/'} className="text-2xl font-bold mb-8">Dashboard Inc.</Link>
+                <Link href={'/'} className="text-2xl font-bold mb-8">Management</Link>
                 <button className="flex items-center justify-center -mt-6 " onClick={()=>setSidebarOpen(!sidebarOpen)}> <i className={`fi fi-rr-angle-double-${sidebarOpen?"left":"right"}`}></i></button>
             </div>
 
             <nav className="space-y-10 text-sm">
                 <div className="space-y-4">
                     <p className="uppercase text-muted-foreground text-xs mb-4">Dashboard</p>
-                    <a href="#analytics" className="flex items-center gap-3 hover:text-primary">
-                        <i className="fi fi-rr-chart-line-up"></i>
-                        Analytics
-                    </a>
-                    <a href="#products" className="flex items-center gap-3 hover:text-primary">
+                    <a href="#tasks" className="flex items-center gap-3 hover:text-primary">
                         <i className="fi fi-rr-box"></i>
-                        Products
+                        Task Management
                     </a>
                 </div>
 

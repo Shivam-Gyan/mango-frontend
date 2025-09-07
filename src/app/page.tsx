@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     if (!loading && !user) {
       console.log('Loading:', loading, 'User:', user);
-      router.push("/auth/login");
+      router.push("/auth/signup");
     }
   }, [user, loading, router]);
 

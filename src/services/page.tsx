@@ -1,32 +1,34 @@
-// src/services/auth.service.ts
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError } from "axios";
 
-const BASE_ORIGIN = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+const BASE_ORIGIN = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 const BASE_URL = `${BASE_ORIGIN}/api`;
 
 interface LoginData {
   email: string;
+  password: string;
 }
 
 interface SignupData {
   name: string;
   email: string;
+  password: string;
 }
 
-interface OtpPayload {
+interface User {
+  id: string;
+  name: string;
   email: string;
-  otp: string;
+  tasks?: any[];
 }
 
-// Optional generic type for API response structure
 interface ApiResponse<T> {
   success: boolean;
   message: string;
   data?: T;
-  token?: string; // <- optional
+  token?: string;
+  user?: User;
 }
 
-// Helper functions with generic typing
 const safePost = async <T = any>(url: string, data?: any): Promise<T> => {
   try {
     const res = await axios.post<T>(`${BASE_URL}${url}`, data, {
@@ -53,18 +55,11 @@ const safeGet = async <T = any>(url: string): Promise<T> => {
   }
 };
 
-// Public API functions
 export const login = async (data: LoginData) =>
-  await safePost<ApiResponse<null>>('/login', data);
+  await safePost<ApiResponse<User>>("/login", data);
 
 export const signup = async (data: SignupData) =>
-  await safePost<ApiResponse<null>>('/signup', data);
-
-export const verifyOtp = async (data: OtpPayload) =>
-  await safePost<ApiResponse<{ token: string }>>('/verify-otp', data);
-
-export const resendOtp = async (email: string) =>
-  await safePost<ApiResponse<null>>('/resend-otp', { email });
+  await safePost<ApiResponse<User>>("/signup", data);
 
 export const getProfile = async () =>
-  await safeGet<{ user: any }>('/get-profile');
+  await safeGet<{ user: User }>("/get-profile");
